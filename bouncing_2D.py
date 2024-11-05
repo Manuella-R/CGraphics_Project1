@@ -87,3 +87,34 @@ class Simulation:
             # If the mouse click is within the ball's radius
             if np.linalg.norm(ball.position.vector - mouse_pos) < ball.mass:
                 ball.bounce_away(mouse_pos)
+def mouse_callback(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        simulation.handle_mouse_click(Vector(x, y))
+
+def main():
+    global simulation
+    width, height = 512, 512
+    img = np.zeros((height, width, 3), np.uint8)
+    img_copy = np.copy(img)
+
+    simulation = Simulation(width, height, num_balls=10)
+    
+    cv2.namedWindow(winname='Physics Simulation')
+    cv2.setMouseCallback('Physics Simulation', mouse_callback)
+
+    while True:
+        img = np.copy(img_copy)
+        simulation.update_balls()
+        simulation.draw(img)
+
+        cv2.imshow('Physics Simulation', img)
+
+        if cv2.waitKey(20) & 0xFF == 27:  # Exit on ESC key
+            break
+        
+        time.sleep(1 / 120)  # Maintain a frame rate of 120 FPS
+
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
