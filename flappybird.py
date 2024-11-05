@@ -95,3 +95,12 @@ class Pipe:
                 return True
         return False
 
+def create_pipes():
+    height = random.randint(100, 400)
+    top_pipe = Pipe(SCREEN_WIDTH, height, True)
+    bottom_pipe = Pipe(SCREEN_WIDTH, SCREEN_HEIGHT - height - PIPE_GAP, False)
+    return top_pipe, bottom_pipe
+
+def display_lives(lives):
+    lives_text = font.render(f"Lives: {lives}", True, (255, 255, 255))
+    screen.blit(lives_text, (10, 10))
