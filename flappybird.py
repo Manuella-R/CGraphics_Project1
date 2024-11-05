@@ -104,3 +104,49 @@ def create_pipes():
 def display_lives(lives):
     lives_text = font.render(f"Lives: {lives}", True, (255, 255, 255))
     screen.blit(lives_text, (10, 10))
+
+# Game Loop
+bird = Bird()
+pipes = list(create_pipes())
+lives = LIVES
+running = True
+
+while running:
+    screen.fill((0, 0, 0))
+
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                bird.bump()
+
+    # Update game state
+    bird.update()
+    for pipe in pipes:
+        pipe.update()
+
+    # Check for collisions
+    if any(pipe.collide(bird) for pipe in pipes) or bird.y >= SCREEN_HEIGHT - BIRD_RADIUS:
+        lives -= 1
+        if lives <= 0:
+            running = False  # End game when lives are zero
+        else:
+            bird = Bird()  # Reset bird position
+            pipes = list(create_pipes())  # Reset pipes
+
+    # Generate new pipes when the previous ones are off-screen
+    if pipes[0].x < -PIPE_WIDTH:
+        pipes = pipes[2:] + list(create_pipes())
+
+    # Drawing
+    bird.draw(screen)
+    for pipe in pipes:
+        pipe.draw(screen)
+    display_lives(lives)  # Show remaining lives
+
+    pygame.display.flip()
+    clock.tick(30)
+
+pygame.quit()
