@@ -67,7 +67,19 @@ This game is inspired by "Flappy Bird" but features a spherical bird with a 3D g
 
 ## Screenshots
 
-*(Optional: Add screenshots of each simulation here.)*
+**brick breaker:** 
+![image](https://github.com/user-attachments/assets/30a60b9c-3d62-41a3-8b60-17507074af2d)
+
+<br>
+ 
+**3D sphere:** 
+![image](https://github.com/user-attachments/assets/72ac24b1-117c-4230-9a0e-58a60d03c672)
+<br>
+
+**bouncing ball:**
+![image](https://github.com/user-attachments/assets/1caa9a41-111d-43ef-8e8e-e1c756952c67)
+<br>
+
 
 ## License
 
