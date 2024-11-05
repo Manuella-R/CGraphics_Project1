@@ -54,3 +54,37 @@ class Ball:
         highlight_color = (255, 255, 255)  # White highlight
         pygame.draw.circle(win, highlight_color, (self.x + 3, self.y + 3), self.radius)  # Highlight
         pygame.draw.circle(win, self.color, (self.x, self.y), self.radius)  # Main color
+
+class Brick:
+    def __init__(self, x, y, width, height, health, colors):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.health = health
+        self.max_health = health
+        self.colors = colors
+        self.color = colors[0]
+
+    def draw(self, win):
+        # Draw a 3D brick effect
+        pygame.draw.rect(win, (100, 100, 100), (self.x, self.y, self.width, self.height))  # Shadow
+        pygame.draw.rect(win, self.color, (self.x + 2, self.y + 2, self.width, self.height))  # Main brick
+
+    def collide(self, ball):
+        if not (ball.x <= self.x + self.width and ball.x >= self.x):
+            return False
+        if not (ball.y - ball.radius <= self.y + self.height):
+            return False
+
+        self.hit()
+        ball.set_vel(ball.x_vel, ball.y_vel * -1)
+        return True
+
+    def hit(self):
+        self.health -= 1
+        self.color = self.interpolate(*self.colors, self.health / self.max_health)
+
+    @staticmethod
+    def interpolate(color_a, color_b, t):
+        return tuple(int(a + (b - a) * t) for a, b in zip(color_a, color_b))
