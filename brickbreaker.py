@@ -88,3 +88,21 @@ class Brick:
     @staticmethod
     def interpolate(color_a, color_b, t):
         return tuple(int(a + (b - a) * t) for a, b in zip(color_a, color_b))
+def draw(win, paddle, ball, bricks, lives):
+    win.fill("white")
+    paddle.draw(win)
+    ball.draw(win)
+
+    for brick in bricks:
+        brick.draw(win)
+
+    lives_text = LIVES_FONT.render(f"Lives: {lives}", 1, "black")
+    win.blit(lives_text, (10, HEIGHT - lives_text.get_height() - 10))
+
+    pygame.display.update()
+
+def ball_collision(ball):
+    if ball.x - BALL_RADIUS <= 0 or ball.x + BALL_RADIUS >= WIDTH:
+        ball.set_vel(ball.x_vel * -1, ball.y_vel)
+    if ball.y + BALL_RADIUS >= HEIGHT or ball.y - BALL_RADIUS <= 0:
+        ball.set_vel(ball.x_vel, ball.y_vel * -1)
