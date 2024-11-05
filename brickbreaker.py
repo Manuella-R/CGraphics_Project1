@@ -123,3 +123,17 @@ def ball_paddle_collision(ball, paddle):
     y_vel = math.cos(angle_radians) * ball.VEL * -1
 
     ball.set_vel(x_vel, y_vel)
+
+def generate_bricks(rows, cols):
+    gap = 2
+    brick_width = WIDTH // cols - gap
+    brick_height = 20
+
+    bricks = []
+    for row in range(rows):
+        for col in range(cols):
+            brick = Brick(col * brick_width + gap * col, row * brick_height +
+                          gap * row, brick_width, brick_height, 2, [(0, 255, 0), (255, 0, 0)])
+            bricks.append(brick)
+
+    return bricks
