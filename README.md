@@ -1,87 +1,74 @@
----
+# 3D Flappy Sphere Game
 
-# Computer graphics
+This project is a modernized version of the classic Flappy Bird game, featuring a spherical bird in a 3D environment with gradient effects, as well as 3D-styled pipes. The objective is to control the vertical movement of the sphere and navigate it through the pipes while avoiding collisions.
 
-This repository contains four interactive simulation projects in Python, demonstrating physics concepts in both 2D and 3D environments. Each project includes dynamic object interactions, from bouncing objects to a classic brick breaker game and a 3D flappy bird-style sphere game.
+## Project Description
 
-## Projects
+The **3D Flappy Sphere Game** uses Python, Pygame, and Cairo to create a 3D effect with simple gameplay mechanics:
+- Players control a spherical bird with a gradient effect that mimics realistic shading.
+- The pipes are rendered with a 3D-like shading effect for visual depth.
+- Players earn points by successfully navigating through the gaps in the pipes, with a lives system that allows multiple attempts before game over.
 
-### 1. 2D Ball Bounce Simulation (`bouncing_2D.py`)
+## Key Features
+- **3D Gradient Effect:** The bird is rendered as a 3D sphere with a gradient effect created using Cairo, providing a visually engaging experience.
+- **Pipe Class with 3D Shading:** The pipes have a shaded effect to simulate 3D depth.
+- **Lives System:** Players have multiple lives, allowing several attempts before losing the game.
 
-This project simulates multiple balls bouncing within a 2D environment using OpenCV. Balls respond to mouse clicks, causing them to bounce away, mimicking real-life collision and response.
+## Project Setup/Installation Instructions
 
-- **Key Features:**
-  - Random initial velocity for each ball.
-  - Realistic edge detection to prevent balls from escaping the frame.
-  - Adjustable gravity and bounce dynamics on user interaction.
-- **Dependencies:** `numpy`, `opencv-python`, `random`
+### Prerequisites
+Ensure that you have Python installed. You'll also need the following libraries:
+- `pygame`
+- `cairo`
+- `random`
+- `math`
 
-### 2. 3D Sphere Bounce Simulation (`bouncing_sphere.py`)
-
-This simulation uses VPython to model a 3D environment where spheres bounce within a confined box. Spheres interact with box boundaries and user mouse clicks, applying a bouncing effect with velocity dampening.
-
-- **Key Features:**
-  - 3D perspective with boundary constraints and random initial velocity.
-  - Damping effect for realistic energy loss on collision.
-  - User-controlled interactions to alter sphere trajectory.
-- **Dependencies:** `vpython`, `random`, `time`
-
-### 3. Brick Breaker Game (`brickbreaker.py`)
-
-This classic game replicates a 3D-styled brick breaker using Pygame. The player controls a paddle to bounce the ball, aiming to break all bricks. Losing lives resets the game.
-
-- **Key Features:**
-  - Interactive paddle movement and ball physics.
-  - 3D visual effects for paddle and brick graphics.
-  - Adjustable difficulty with varying brick patterns.
-- **Dependencies:** `pygame`, `math`
-
-### 4. 3D Flappy Sphere Game (`flappy_sphere.py`)
-
-This game is inspired by "Flappy Bird" but features a spherical bird with a 3D gradient effect, along with 3D-styled pipes. Players control the bird's vertical movement to navigate through pipes while avoiding collisions.
-
-- **Key Features:**
-  - Bird class with a 3D gradient effect created using Cairo for realistic sphere shading.
-  - Pipe class with shading to simulate a 3D appearance.
-  - Lives system to allow multiple attempts before game over.
-- **Dependencies:** `pygame`, `random`, `cairo`, `math`
-
-## Installation and Setup
+### Steps to Set Up the Project
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/MAnuella-R/CGraphics_Project1.git
-    cd CGraphics_Project1
+    git clone https://github.com/YourUsername/3D-Flappy-Sphere.git
+    cd 3D-Flappy-Sphere
     ```
 
-2. Install dependencies:
+2. Install the necessary dependencies using the `requirements.txt` file:
     ```bash
-    pip install numpy opencv-python vpython pygame pycairo
+    pip install -r requirements.txt
     ```
 
-3. Run each simulation individually:
-   - **2D Ball Bounce:** `python bouncing_2D.py`
-   - **3D Sphere Bounce:** `python bouncing_sphere.py`
-   - **Brick Breaker:** `python brickbreaker.py`
-   - **3D Flappy Sphere:** `python flappy_sphere.py`
+3. Run the game:
+    ```bash
+    python flappy_sphere.py
+    ```
+
+## Usage Instructions
+
+### How to Play
+
+- Use the spacebar or mouse click to control the sphere's vertical movement.
+- Navigate through the gaps between the pipes.
+- Avoid collisions with the pipes; you will lose a life each time you hit a pipe.
+- The game ends when you run out of lives.
+
+### Input/Output
+
+- **Input:** Spacebar or mouse clicks to control the bird's movement.
+- **Output:** A score displayed on the screen showing how many pipes you've successfully passed through.
+
+## Project Structure
+
+
+### Key Files
+
+- `flappy_sphere.py`: The main script that contains the game logic, including the Bird and Pipe classes.
+- `requirements.txt`: A list of dependencies required to run the project. [View the file](requirements.txt).
 
 ## Screenshots
 
-**brick breaker:** 
-![image](https://github.com/user-attachments/assets/30a60b9c-3d62-41a3-8b60-17507074af2d)
+**3D Flappy Sphere in Action:**
 
-<br>
- 
-**3D sphere:** 
-![image](https://github.com/user-attachments/assets/72ac24b1-117c-4230-9a0e-58a60d03c672)
-<br>
-
-**bouncing ball:**
-![image](https://github.com/user-attachments/assets/1caa9a41-111d-43ef-8e8e-e1c756952c67)
-<br>
-
+![Flappy Sphere Gameplay](screenshots/flappy_sphere_gameplay.png)
 
 ## License
 
-This repository is licensed under the MIT License.
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
