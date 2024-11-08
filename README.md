@@ -27,7 +27,7 @@ Ensure that you have Python installed. You'll also need the following libraries:
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/YourUsername/3D-Flappy-Sphere.git
+    git clone https://github.com/Manuella-R/3D-Flappy-Sphere.git
     cd 3D-Flappy-Sphere
     ```
 
@@ -75,12 +75,13 @@ Ensure that you have Python installed. You'll also need the following libraries:
 - Special thanks to the creators of **Pygame** and **Cairo**, whose libraries enabled the development of this interactive game.
 - Additional resources and tutorials from various contributors on platforms like StackOverflow and GitHub were invaluable in overcoming implementation challenges.
 
-## Screenshots
+## Video Gameplay
 
 **3D Flappy Sphere in Action:**
 
-![Flappy Sphere Gameplay](screenshots/flappy_sphere_gameplay.png)
-
+[![Flappy Sphere Gameplay](screenshots/flappy_sphere_gameplay.png)
+](https://github.com/user-attachments/assets/cefae574-b02f-4ce6-b30a-fe8eedf481e7
+)
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
