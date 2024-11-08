@@ -68,6 +68,13 @@ Ensure that you have Python installed. You'll also need the following libraries:
 - `flappy_sphere.py`: The main script that contains the game logic, including the Bird and Pipe classes.
 - `requirements.txt`: A list of dependencies required to run the project. [View the file](requirements.txt).
 
+
+## Acknowledgements
+
+- The **Flappy Bird** game was originally created by **Dong Nguyen** and released by **Gears Studio**. The game’s core concept and design heavily inspired the creation of this 3D version.
+- Special thanks to the creators of **Pygame** and **Cairo**, whose libraries enabled the development of this interactive game.
+- Additional resources and tutorials from various contributors on platforms like StackOverflow and GitHub were invaluable in overcoming implementation challenges.
+
 ## Screenshots
 
 **3D Flappy Sphere in Action:**
