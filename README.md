@@ -56,6 +56,11 @@ Ensure that you have Python installed. You'll also need the following libraries:
 - **Output:** A score displayed on the screen showing how many pipes you've successfully passed through.
 
 ## Project Structure
+3D-Flappy-Sphere/
+│
+├── flappy_sphere.py         # Main game file
+├── requirements.txt         # Python dependencies
+└── README.md                # Project documentation
 
 
 ### Key Files
