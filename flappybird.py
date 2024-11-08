@@ -21,6 +21,7 @@ pygame.display.set_caption('3D Flappy Sphere')
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 30)
 
+
 # Bird (Sphere) Class with 3D gradient effect
 class Bird:
     def __init__(self):
@@ -39,12 +40,12 @@ class Bird:
         # Using Cairo to create a radial gradient to simulate 3D sphere effect
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 2 * BIRD_RADIUS, 2 * BIRD_RADIUS)
         cr = cairo.Context(surface)
-        
+
         # Radial gradient for the 3D effect on the sphere
         gradient = cairo.RadialGradient(BIRD_RADIUS, BIRD_RADIUS, 5, BIRD_RADIUS, BIRD_RADIUS, BIRD_RADIUS)
         gradient.add_color_stop_rgba(0, 0.2, 0.2, 1, 1)  # Center color
         gradient.add_color_stop_rgba(1, 0, 0, 0.6, 1)  # Edge color
-        
+
         cr.set_source(gradient)
         cr.arc(BIRD_RADIUS, BIRD_RADIUS, BIRD_RADIUS, 0, 2 * math.pi)
         cr.fill()
@@ -95,21 +96,33 @@ class Pipe:
                 return True
         return False
 
+
+# Functions
 def create_pipes():
     height = random.randint(100, 400)
     top_pipe = Pipe(SCREEN_WIDTH, height, True)
     bottom_pipe = Pipe(SCREEN_WIDTH, SCREEN_HEIGHT - height - PIPE_GAP, False)
     return top_pipe, bottom_pipe
 
+
 def display_lives(lives):
     lives_text = font.render(f"Lives: {lives}", True, (255, 255, 255))
     screen.blit(lives_text, (10, 10))
+
+
+def display_score(score):
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(score_text, (SCREEN_WIDTH - 100, 10))
+
 
 # Game Loop
 bird = Bird()
 pipes = list(create_pipes())
 lives = LIVES
+score = 0
 running = True
+paused = False
+game_over = False
 
 while running:
     screen.fill((0, 0, 0))
@@ -119,32 +132,47 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and not game_over and not paused:
                 bird.bump()
+            if event.key == pygame.K_q and game_over:
+                running = False
+            if event.key == pygame.K_RETURN:  # Toggle pause when Enter is pressed
+                paused = not paused
 
-    # Update game state
-    bird.update()
-    for pipe in pipes:
-        pipe.update()
+    if not game_over and not paused:
+        # Update game state
+        bird.update()
+        for pipe in pipes:
+            pipe.update()
 
-    # Check for collisions
-    if any(pipe.collide(bird) for pipe in pipes) or bird.y >= SCREEN_HEIGHT - BIRD_RADIUS:
-        lives -= 1
-        if lives <= 0:
-            running = False  # End game when lives are zero
-        else:
-            bird = Bird()  # Reset bird position
-            pipes = list(create_pipes())  # Reset pipes
+        # Check for collisions
+        if any(pipe.collide(bird) for pipe in pipes) or bird.y >= SCREEN_HEIGHT - BIRD_RADIUS:
+            lives -= 1
+            if lives <= 0:
+                game_over = True  # End game when lives are zero
+            else:
+                bird = Bird()  # Reset bird position
+                pipes = list(create_pipes())  # Reset pipes
 
-    # Generate new pipes when the previous ones are off-screen
-    if pipes[0].x < -PIPE_WIDTH:
-        pipes = pipes[2:] + list(create_pipes())
+        # Generate new pipes when the previous ones are off-screen
+        if pipes[0].x < -PIPE_WIDTH:
+            pipes = pipes[2:] + list(create_pipes())
+            score += 1  # Increase score for each pipe passed
 
     # Drawing
     bird.draw(screen)
     for pipe in pipes:
         pipe.draw(screen)
     display_lives(lives)  # Show remaining lives
+    display_score(score)  # Show score
+
+    if paused:
+        pause_text = font.render("Paused - Press Enter to Resume", True, (255, 255, 0))
+        screen.blit(pause_text, (SCREEN_WIDTH // 2 - pause_text.get_width() // 2, SCREEN_HEIGHT // 2))
+
+    if game_over:
+        game_over_text = font.render("You Lost! Press 'Q' to Quit", True, (255, 0, 0))
+        screen.blit(game_over_text, (SCREEN_WIDTH // 2 - game_over_text.get_width() // 2, SCREEN_HEIGHT // 2))
 
     pygame.display.flip()
     clock.tick(30)
